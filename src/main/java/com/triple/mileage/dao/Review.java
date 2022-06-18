@@ -10,5 +10,6 @@ public class Review {
 
     private String id;
     private String userId;
+    private int point;
 
 }

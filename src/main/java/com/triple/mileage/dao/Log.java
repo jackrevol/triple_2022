@@ -8,6 +8,7 @@ import lombok.*;
 public class Log {
 
     private String id;
+    private int changePoint;
     private EventDTO event;
 
 }
