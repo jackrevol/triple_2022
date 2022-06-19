@@ -1,5 +1,9 @@
 package com.triple.mileage.enums;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum EventAction {
-    ADD,MOD,DELETE;
+    @JsonProperty("ADD") ADD,
+    @JsonProperty("MOD") MOD,
+    @JsonProperty("DELETE") DELETE
 }

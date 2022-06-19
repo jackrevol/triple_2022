@@ -1,7 +1,8 @@
 package com.triple.mileage.dao;
 
 import com.triple.mileage.dto.EventDTO;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
