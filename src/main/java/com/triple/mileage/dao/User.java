@@ -21,4 +21,16 @@ public class User {
     @Column(columnDefinition = "default 0")
     private Long point;
 
+    public User(String id){
+        this.id = id;
+        this.point = 0L;
+    }
+
+    public void addPoint(int point){
+        this.point += point;
+    }
+
+    public void subtractPoint(int point) {
+        this.point -= point;
+    }
 }
