@@ -7,12 +7,18 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(indexes = {
+        @Index(name = "review", columnList = "userId"),
+        @Index(name = "place", columnList = "placeId")
+})
 public class Review {
 
     @Id

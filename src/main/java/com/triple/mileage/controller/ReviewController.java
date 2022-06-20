@@ -23,13 +23,13 @@ public class ReviewController {
 
         switch (eventDTO.getAction()) {
             case ADD: {
-                reviewService.addEvent(eventDTO);
+                reviewService.addReview(eventDTO);
             }
             case MOD: {
-                reviewService.modEvent(eventDTO);
+                reviewService.modReview(eventDTO);
             }
             case DELETE: {
-                reviewService.deleteEvent(eventDTO);
+                reviewService.deleteReview(eventDTO);
             }
         }
         return 0L;

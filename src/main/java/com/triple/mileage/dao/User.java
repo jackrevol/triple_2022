@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -18,15 +17,14 @@ public class User {
 
     @Id
     private String id;
-    @Column(columnDefinition = "default 0")
     private Long point;
 
-    public User(String id){
+    public User(String id) {
         this.id = id;
         this.point = 0L;
     }
 
-    public void addPoint(int point){
+    public void addPoint(int point) {
         this.point += point;
     }
 
