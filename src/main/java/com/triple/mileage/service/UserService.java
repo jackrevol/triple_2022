@@ -16,24 +16,21 @@ public class UserService {
         return userRepository.findById(userId).orElseThrow(NullPointerException::new).getPoint();
     }
 
-    public boolean addUserPoint(String userId, int point) {
+    public void addUserPoint(String userId, int point) {
         User user = userRepository.findById(userId).orElse(new User(userId));
         user.addPoint(point);
         userRepository.save(user);
-        return true;
     }
 
-    public boolean subtractUserPoint(String userId, int point) {
+    public void subtractUserPoint(String userId, int point) {
         User user = userRepository.findById(userId).orElse(new User(userId));
         user.subtractPoint(point);
         userRepository.save(user);
-        return true;
     }
 
-    public boolean modUserPoint(String userId, int reviewOrgPoint, int reviewModPoint) {
+    public void modUserPoint(String userId, int reviewOrgPoint, int reviewModPoint) {
         User user = userRepository.findById(userId).orElseThrow(NullPointerException::new);
         user.setPoint(user.getPoint() - reviewOrgPoint + reviewModPoint);
         userRepository.save(user);
-        return true;
     }
 }

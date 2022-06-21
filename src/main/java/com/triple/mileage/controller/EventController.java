@@ -16,7 +16,7 @@ public class EventController {
     ReviewService reviewService;
 
     @PostMapping("/events")
-    public Long postReview(@RequestBody String requestBody) throws JsonProcessingException {
+    public void postReview(@RequestBody String requestBody) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
 
         EventDTO eventDTO = mapper.readValue(requestBody, EventDTO.class);
@@ -24,14 +24,16 @@ public class EventController {
         switch (eventDTO.getAction()) {
             case ADD: {
                 reviewService.addReview(eventDTO);
+                break;
             }
             case MOD: {
                 reviewService.modReview(eventDTO);
+                break;
             }
             case DELETE: {
                 reviewService.deleteReview(eventDTO);
+                break;
             }
         }
-        return 0L;
     }
 }

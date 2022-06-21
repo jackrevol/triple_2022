@@ -39,6 +39,7 @@ public class PhotoService {
         photoRepository.deleteByIdIn(photoIdList);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void updatePhotosByModReview(List<String> photoIdList, String reviewId) {
         List<String> orgPhotoIdList = photoRepository.findAllByReviewId(reviewId)
                 .stream().map(photo -> photo.getId())
