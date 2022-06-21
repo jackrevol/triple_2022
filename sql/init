@@ -1,0 +1,3 @@
+CREATE DATABASE triple;
+CREATE USER user@localhost identified by 'user';
+GRANT all ON triple.* to user@localhost;
