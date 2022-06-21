@@ -1,0 +1,27 @@
+CREATE TABLE `user` (
+                        `id` varchar(255) NOT NULL,
+                        `point` bigint DEFAULT NULL,
+                        PRIMARY KEY (`id`)
+);
+CREATE TABLE `place`
+(
+    `id`         varchar(255) NOT NULL,
+    `has_review` bit(1)       NOT NULL,
+    PRIMARY KEY (`id`)
+);
+CREATE TABLE `review` (
+                          `id` varchar(255) NOT NULL,
+                          `content` varchar(255) DEFAULT NULL,
+                          `is_first_review` bit(1) NOT NULL,
+                          `place_id` varchar(255) DEFAULT NULL,
+                          `point` int NOT NULL,
+                          `user_id` varchar(255) NOT NULL,
+                          PRIMARY KEY (`id`)
+);
+CREATE TABLE `photo` (
+                         `id` varchar(255) NOT NULL,
+                         `review_id` varchar(255) NOT NULL,
+                         PRIMARY KEY (`id`)
+);
+
+
