@@ -20,14 +20,12 @@ public class PointChangeLog {
     private EventAction eventAction;
     private EventType eventType;
     private int pointChangeAmount;
-    private Timestamp timestamp;
     public PointChangeLog(String userId, String reviewId, EventAction eventAction, EventType eventType, int pointChangeAmount){
         this.userId = userId;
         this.reviewId = reviewId;
         this.eventAction = eventAction;
         this.eventType = eventType;
         this.pointChangeAmount = pointChangeAmount;
-        this.timestamp = new Timestamp(System.currentTimeMillis());
     }
 
     @Override
@@ -38,7 +36,6 @@ public class PointChangeLog {
                 ", eventAction=" + eventAction +
                 ", eventType=" + eventType +
                 ", pointChangeAmount=" + pointChangeAmount +
-                ", timestamp=" + timestamp +
                 '}';
     }
 }
