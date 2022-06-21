@@ -1,33 +1,29 @@
 package com.triple.mileage.service;
 
-import com.triple.mileage.dao.Photo;
 import com.triple.mileage.dao.Review;
 import com.triple.mileage.dto.EventDTO;
-import com.triple.mileage.repository.PhotoRepository;
-import com.triple.mileage.repository.PlaceRepository;
 import com.triple.mileage.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 @Service
 public class ReviewService {
 
     @Autowired
-    UserService userService;
+    private ReviewRepository reviewRepository;
 
     @Autowired
-    PlaceService placeService;
+    private UserService userService;
 
     @Autowired
-    PhotoService photoService;
+    private PlaceService placeService;
 
     @Autowired
-    ReviewRepository reviewRepository;
+    private PhotoService photoService;
+
+    @Autowired
+    private LogService logService;
 
     public void addReview(EventDTO eventDTO) {
         int bounusPoint = 0;
@@ -53,7 +49,7 @@ public class ReviewService {
         userService.addUserPoint(eventDTO.getUserId(), bounusPoint);
         reviewRepository.save(review);
         photoService.createPhotos(eventDTO.getAttachedPhotoIds(), eventDTO.getReviewId());
-
+        logService.logPointChange(eventDTO.getUserId(), bounusPoint, eventDTO.getReviewId(), eventDTO.getType(), eventDTO.getAction());
     }
 
     public void modReview(EventDTO eventDTO) {
@@ -71,9 +67,11 @@ public class ReviewService {
         review.setPoint(reviewNewPoint);
         reviewRepository.save(review);
 
-        photoService.updatePhotosByModReview(eventDTO.getAttachedPhotoIds(),eventDTO.getReviewId());
+        photoService.updatePhotosByModReview(eventDTO.getAttachedPhotoIds(), eventDTO.getReviewId());
+        logService.logPointChange(eventDTO.getUserId(), reviewNewPoint - reviewOrgPoint, eventDTO.getReviewId(), eventDTO.getType(), eventDTO.getAction());
 
     }
+
     @Transactional(rollbackFor = Exception.class)
     public void deleteReview(EventDTO eventDTO) {
         String reviewId = eventDTO.getReviewId();
@@ -87,6 +85,7 @@ public class ReviewService {
         if (!reviewRepository.existsByPlaceId(eventDTO.getPlaceId())) {
             placeService.makeHasNoReview(eventDTO.getPlaceId());
         }
+        logService.logPointChange(eventDTO.getUserId(), -1 * review.getPoint(), eventDTO.getReviewId(), eventDTO.getType(), eventDTO.getAction());
     }
 
 

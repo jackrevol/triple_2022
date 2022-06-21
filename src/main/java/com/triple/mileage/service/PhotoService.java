@@ -25,7 +25,7 @@ public class PhotoService {
 
     public void createPhotos(List<String> photoIdList, String reviewId) {
         List<Photo> photoList = new ArrayList();
-        for(String photoId : photoIdList){
+        for (String photoId : photoIdList) {
             photoList.add(new Photo(photoId, reviewId));
         }
         photoRepository.saveAll(photoList);
@@ -39,7 +39,7 @@ public class PhotoService {
         photoRepository.deleteByIdIn(photoIdList);
     }
 
-    public void updatePhotosByModReview(List<String> photoIdList, String reviewId){
+    public void updatePhotosByModReview(List<String> photoIdList, String reviewId) {
         List<String> orgPhotoIdList = photoRepository.findAllByReviewId(reviewId)
                 .stream().map(photo -> photo.getId())
                 .collect(Collectors.toList());
@@ -53,7 +53,7 @@ public class PhotoService {
         photoIdList.removeAll(distinctPhotoList);
         photoRepository.deleteByIdIn(orgPhotoIdList);
 
-        this.createPhotos(photoIdList,reviewId);
+        this.createPhotos(photoIdList, reviewId);
     }
 
 

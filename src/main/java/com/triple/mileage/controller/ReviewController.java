@@ -3,6 +3,7 @@ package com.triple.mileage.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.triple.mileage.dto.EventDTO;
+import com.triple.mileage.service.LogService;
 import com.triple.mileage.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,9 @@ public class ReviewController {
 
     @Autowired
     ReviewService reviewService;
+
+    @Autowired
+    LogService logService;
 
     @PostMapping("/events")
     public Long postReview(@RequestBody String requestBody) throws JsonProcessingException {
@@ -32,6 +36,8 @@ public class ReviewController {
                 reviewService.deleteReview(eventDTO);
             }
         }
+
+        logService.savePointLog(eventDTO);
         return 0L;
     }
 }
