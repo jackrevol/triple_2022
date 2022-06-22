@@ -28,16 +28,16 @@ public class ReviewService {
     private PhotoService photoService;
 
     public void addReview(EventDTO eventDTO) {
-        int bounusPoint = 0;
-        Boolean isFirstReview = !placeService.hasReview(eventDTO.getPlaceId());
+        int bonusPoint = 0;
+        boolean isFirstReview = !placeService.hasReview(eventDTO.getPlaceId());
         if (isFirstReview) {
-            bounusPoint += 1;
+            bonusPoint += 1;
         }
         if (eventDTO.getContent().length() > 0) {
-            bounusPoint += 1;
+            bonusPoint += 1;
         }
         if (eventDTO.getAttachedPhotoIds().size() > 0) {
-            bounusPoint += 1;
+            bonusPoint += 1;
         }
 
         Review review = new Review(eventDTO.getReviewId(),
@@ -45,9 +45,9 @@ public class ReviewService {
                 eventDTO.getPlaceId(),
                 eventDTO.getContent(),
                 isFirstReview,
-                bounusPoint);
+                bonusPoint);
 
-        userService.addUserPoint(eventDTO.getUserId(), bounusPoint);
+        userService.addUserPoint(eventDTO.getUserId(), bonusPoint);
         reviewRepository.save(review);
         photoService.createPhotos(eventDTO.getAttachedPhotoIds(), eventDTO.getReviewId());
         logger.info(new PointChangeLog(
@@ -55,7 +55,7 @@ public class ReviewService {
                 eventDTO.getReviewId(),
                 eventDTO.getAction(),
                 eventDTO.getType(),
-                bounusPoint)
+                bonusPoint)
                 .toString());
     }
 
