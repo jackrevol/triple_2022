@@ -16,9 +16,7 @@ public class PointController {
     UserService userService;
 
     @GetMapping("/point")
-    public Long getUserPoint(@RequestBody String requestBody) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        PointDTO pointDTO = objectMapper.readValue(requestBody, PointDTO.class);
+    public Long getUserPoint(@RequestBody PointDTO pointDTO) throws JsonProcessingException {
         return userService.getUserPoint(pointDTO.getUserId());
     }
 

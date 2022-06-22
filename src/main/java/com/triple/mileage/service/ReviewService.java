@@ -30,14 +30,6 @@ public class ReviewService {
     public void addReview(EventDTO eventDTO) {
         int bounusPoint = 0;
         Boolean isFirstReview = !placeService.hasReview(eventDTO.getPlaceId());
-
-        Review review = new Review(eventDTO.getReviewId(),
-                eventDTO.getUserId(),
-                eventDTO.getPlaceId(),
-                eventDTO.getContent(),
-                isFirstReview,
-                bounusPoint);
-
         if (isFirstReview) {
             bounusPoint += 1;
         }
@@ -47,6 +39,13 @@ public class ReviewService {
         if (eventDTO.getAttachedPhotoIds().size() > 0) {
             bounusPoint += 1;
         }
+
+        Review review = new Review(eventDTO.getReviewId(),
+                eventDTO.getUserId(),
+                eventDTO.getPlaceId(),
+                eventDTO.getContent(),
+                isFirstReview,
+                bounusPoint);
 
         userService.addUserPoint(eventDTO.getUserId(), bounusPoint);
         reviewRepository.save(review);
