@@ -8,6 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, String> {
+
+    boolean existsById(String id);
+
     boolean existsByPlaceId(String placeId);
 
     Optional<Review> findById(String id);
