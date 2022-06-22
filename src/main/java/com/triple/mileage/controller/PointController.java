@@ -1,7 +1,6 @@
 package com.triple.mileage.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.triple.mileage.dto.PointDTO;
 import com.triple.mileage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,10 @@
 package com.triple.mileage.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.triple.mileage.dao.Photo;
+import com.triple.mileage.dao.Place;
+import com.triple.mileage.dao.Review;
+import com.triple.mileage.dao.User;
 import com.triple.mileage.dto.EventDTO;
-import com.triple.mileage.dto.PointDTO;
 import com.triple.mileage.enums.EventAction;
 import com.triple.mileage.enums.EventType;
 import com.triple.mileage.repository.PhotoRepository;
@@ -13,7 +14,6 @@ import com.triple.mileage.repository.UserRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class EventControllerTest {
 
     @Test
     @Order(001)
-    public void addTest() throws JsonProcessingException {
+    public void addTest() throws Exception {
         EventDTO eventDTO = new EventDTO();
         eventDTO.setType(EventType.REVIEW);
         eventDTO.setAction(EventAction.ADD);
@@ -48,14 +48,21 @@ public class EventControllerTest {
         eventDTO.setAttachedPhotoIds(attachedPhotoIds);
         eventDTO.setUserId("3ede0ef2-92b7-4817-a5f3-0c575361f745");
         eventDTO.setPlaceId("2e4baf1c-5acb-4efb-a1af-eddada31b00f");
-
         eventController.postReview(eventDTO);
+        User user = userRepository.findById("3ede0ef2-92b7-4817-a5f3-0c575361f745").orElseThrow(Exception::new);
+        Assertions.assertEquals(3,user.getPoint());
+        List<Photo> photoList = photoRepository.findAll();
+        Assertions.assertEquals(2,photoList.size());
+        List<Place> placeList = placeRepository.findAll();
+        Assertions.assertEquals(1,placeList.size());
+        List<Review> reviewList = reviewRepository.findAll();
+        Assertions.assertEquals(1,reviewList.size());
     }
 
 
     @Test
     @Order(002)
-    public void modTest() throws JsonProcessingException {
+    public void modTest() throws Exception {
         EventDTO eventDTO = new EventDTO();
         eventDTO.setType(EventType.REVIEW);
         eventDTO.setAction(EventAction.MOD);
@@ -66,12 +73,20 @@ public class EventControllerTest {
         eventDTO.setUserId("3ede0ef2-92b7-4817-a5f3-0c575361f745");
         eventDTO.setPlaceId("2e4baf1c-5acb-4efb-a1af-eddada31b00f");
         eventController.postReview(eventDTO);
+        User user = userRepository.findById("3ede0ef2-92b7-4817-a5f3-0c575361f745").orElseThrow(Exception::new);
+        Assertions.assertEquals(2,user.getPoint());
+        List<Photo> photoList = photoRepository.findAll();
+        Assertions.assertEquals(0,photoList.size());
+        List<Place> placeList = placeRepository.findAll();
+        Assertions.assertEquals(1,placeList.size());
+        List<Review> reviewList = reviewRepository.findAll();
+        Assertions.assertEquals(1,reviewList.size());
     }
 
 
     @Test
     @Order(003)
-    public void deleteTest() throws JsonProcessingException {
+    public void deleteTest() throws Exception {
         EventDTO eventDTO = new EventDTO();
         eventDTO.setType(EventType.REVIEW);
         eventDTO.setAction(EventAction.DELETE);
@@ -82,5 +97,13 @@ public class EventControllerTest {
         eventDTO.setUserId("3ede0ef2-92b7-4817-a5f3-0c575361f745");
         eventDTO.setPlaceId("2e4baf1c-5acb-4efb-a1af-eddada31b00f");
         eventController.postReview(eventDTO);
+        User user = userRepository.findById("3ede0ef2-92b7-4817-a5f3-0c575361f745").orElseThrow(Exception::new);
+        Assertions.assertEquals(0,user.getPoint());
+        List<Photo> photoList = photoRepository.findAll();
+        Assertions.assertEquals(0,photoList.size());
+        List<Place> placeList = placeRepository.findAll();
+        Assertions.assertEquals(1,placeList.size());
+        List<Review> reviewList = reviewRepository.findAll();
+        Assertions.assertEquals(0,reviewList.size());
     }
 }

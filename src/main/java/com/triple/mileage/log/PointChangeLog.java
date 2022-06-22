@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.sql.Timestamp;
+import javax.persistence.Id;
 
 @Getter
 @Setter
@@ -20,7 +19,8 @@ public class PointChangeLog {
     private EventAction eventAction;
     private EventType eventType;
     private int pointChangeAmount;
-    public PointChangeLog(String userId, String reviewId, EventAction eventAction, EventType eventType, int pointChangeAmount){
+
+    public PointChangeLog(String userId, String reviewId, EventAction eventAction, EventType eventType, int pointChangeAmount) {
         this.userId = userId;
         this.reviewId = reviewId;
         this.eventAction = eventAction;
