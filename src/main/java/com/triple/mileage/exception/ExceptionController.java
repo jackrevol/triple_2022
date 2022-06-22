@@ -19,4 +19,9 @@ public class ExceptionController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity handleUnknownException() {
+        return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
