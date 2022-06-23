@@ -21,7 +21,7 @@ mvn pakage
 2. %tomcat_install_path%/webapp 폴더에 빌드한 war 파일 배포
 3. %tomcat_install_path%/bin/start.bat 실행
 4. API별 DTO에 맞게 리퀘스트
-5. 리스폰스 및 DB에 접속해 변경내역을 확인한다.
+5. DB에 접속해 변경내역을 확인한다.
 --------------------------
 # API #
 * 모든 id는 UUID 형식

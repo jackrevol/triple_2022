@@ -20,7 +20,6 @@ public class ExceptionController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-
     @ExceptionHandler(HttpClientErrorException.class)
     public ResponseEntity handleHttpClientErrorException(HttpClientErrorException e) {
         return new ResponseEntity(e.getStatusCode());

@@ -1,6 +1,5 @@
 package com.triple.mileage.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.triple.mileage.dto.EventDTO;
 import com.triple.mileage.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class EventController {
     ReviewService reviewService;
 
     @PostMapping("/events")
-    public ResponseEntity postReview(@RequestBody EventDTO eventDTO) throws JsonProcessingException {
+    public ResponseEntity postReview(@RequestBody EventDTO eventDTO) {
 
         switch (eventDTO.getAction()) {
             case ADD: {
@@ -33,6 +32,6 @@ public class EventController {
                 break;
             }
         }
-        return  new ResponseEntity("200 OK",HttpStatus.OK);
+        return new ResponseEntity("200 OK", HttpStatus.OK);
     }
 }

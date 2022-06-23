@@ -51,13 +51,13 @@ public class EventControllerTest {
         eventDTO.setPlaceId("2e4baf1c-5acb-4efb-a1af-eddada31b00f");
         eventController.postReview(eventDTO);
         User user = userRepository.findById("3ede0ef2-92b7-4817-a5f3-0c575361f745").orElseThrow(Exception::new);
-        Assertions.assertEquals(3,user.getPoint());
+        Assertions.assertEquals(3, user.getPoint());
         List<Photo> photoList = photoRepository.findAll();
-        Assertions.assertEquals(2,photoList.size());
+        Assertions.assertEquals(2, photoList.size());
         List<Place> placeList = placeRepository.findAll();
-        Assertions.assertEquals(1,placeList.size());
+        Assertions.assertEquals(1, placeList.size());
         List<Review> reviewList = reviewRepository.findAll();
-        Assertions.assertEquals(1,reviewList.size());
+        Assertions.assertEquals(1, reviewList.size());
     }
 
 
@@ -75,13 +75,13 @@ public class EventControllerTest {
         eventDTO.setPlaceId("2e4baf1c-5acb-4efb-a1af-eddada31b00f");
         eventController.postReview(eventDTO);
         User user = userRepository.findById("3ede0ef2-92b7-4817-a5f3-0c575361f745").orElseThrow(Exception::new);
-        Assertions.assertEquals(2,user.getPoint());
+        Assertions.assertEquals(2, user.getPoint());
         List<Photo> photoList = photoRepository.findAll();
-        Assertions.assertEquals(0,photoList.size());
+        Assertions.assertEquals(0, photoList.size());
         List<Place> placeList = placeRepository.findAll();
-        Assertions.assertEquals(1,placeList.size());
+        Assertions.assertEquals(1, placeList.size());
         List<Review> reviewList = reviewRepository.findAll();
-        Assertions.assertEquals(1,reviewList.size());
+        Assertions.assertEquals(1, reviewList.size());
     }
 
 
@@ -99,13 +99,13 @@ public class EventControllerTest {
         eventDTO.setPlaceId("2e4baf1c-5acb-4efb-a1af-eddada31b00f");
         eventController.postReview(eventDTO);
         User user = userRepository.findById("3ede0ef2-92b7-4817-a5f3-0c575361f745").orElseThrow(Exception::new);
-        Assertions.assertEquals(0,user.getPoint());
+        Assertions.assertEquals(0, user.getPoint());
         List<Photo> photoList = photoRepository.findAll();
-        Assertions.assertEquals(0,photoList.size());
+        Assertions.assertEquals(0, photoList.size());
         List<Place> placeList = placeRepository.findAll();
-        Assertions.assertEquals(1,placeList.size());
+        Assertions.assertEquals(1, placeList.size());
         List<Review> reviewList = reviewRepository.findAll();
-        Assertions.assertEquals(0,reviewList.size());
+        Assertions.assertEquals(0, reviewList.size());
     }
 
     @Test
@@ -124,12 +124,12 @@ public class EventControllerTest {
         eventDTO.setUserId("3ede0ef2-92b7-4817-a5f3-0c575361f745");
         eventDTO.setPlaceId("2e4baf1c-5acb-4efb-a1af-eddada31b00f");
         eventController.postReview(eventDTO);
-        try{
+        try {
             eventController.postReview(eventDTO);
             eventController.postReview(eventDTO);
-        }catch ( Exception e){
+        } catch (Exception e) {
         }
         User user = userRepository.findById("3ede0ef2-92b7-4817-a5f3-0c575361f745").orElseThrow(Exception::new);
-        Assertions.assertEquals(3,user.getPoint());
+        Assertions.assertEquals(3, user.getPoint());
     }
 }

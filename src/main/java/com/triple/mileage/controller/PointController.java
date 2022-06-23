@@ -1,6 +1,5 @@
 package com.triple.mileage.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.triple.mileage.dto.PointDTO;
 import com.triple.mileage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ public class PointController {
     UserService userService;
 
     @GetMapping("/point")
-    public Long getUserPoint(@RequestBody PointDTO pointDTO) throws JsonProcessingException {
+    public Long getUserPoint(@RequestBody PointDTO pointDTO) {
         return userService.getUserPoint(pointDTO.getUserId());
     }
 

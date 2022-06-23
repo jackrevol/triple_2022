@@ -31,7 +31,7 @@ public class ReviewService {
 
     public void addReview(EventDTO eventDTO) {
 
-        if(reviewRepository.existsById(eventDTO.getReviewId())){
+        if (reviewRepository.existsById(eventDTO.getReviewId())) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
         }
 
@@ -46,7 +46,6 @@ public class ReviewService {
         if (eventDTO.getAttachedPhotoIds().size() > 0) {
             bonusPoint += 1;
         }
-
 
 
         Review review = new Review(eventDTO.getReviewId(),

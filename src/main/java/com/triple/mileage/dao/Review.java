@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(indexes = {
-        @Index(name = "review", columnList = "userId"),
+        @Index(name = "user", columnList = "userId"),
         @Index(name = "place", columnList = "placeId")
 })
 public class Review {
