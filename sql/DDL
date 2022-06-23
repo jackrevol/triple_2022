@@ -16,12 +16,15 @@ CREATE TABLE `review` (
                           `place_id` varchar(255) DEFAULT NULL,
                           `point` int NOT NULL,
                           `user_id` varchar(255) NOT NULL,
-                          PRIMARY KEY (`id`)
+                          PRIMARY KEY (`id`),
+                          KEY `user` (`user_id`),
+                          KEY `place` (`place_id`)
 );
 CREATE TABLE `photo` (
                          `id` varchar(255) NOT NULL,
                          `review_id` varchar(255) NOT NULL,
-                         PRIMARY KEY (`id`)
+                         PRIMARY KEY (`id`),
+                         KEY `review` (`review_id`)
 );
 
 
